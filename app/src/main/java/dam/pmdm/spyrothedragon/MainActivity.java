@@ -1,5 +1,6 @@
 package dam.pmdm.spyrothedragon;
-
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -7,6 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         // Configurar botones del tutorial
         guideBinding.btnStartTutorial.setOnClickListener(v -> updateTutorialStep());
         guideBinding.btnEndTutorial.setOnClickListener(v -> endTutorial());
+        guideBinding.btnContinue.setOnClickListener(v -> updateTutorialStep());
+        guideBinding.btnFinTutorial.setOnClickListener(v -> endTutorial());
 
         // Configurar navegación
         Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.navHostFragment);
@@ -58,14 +62,10 @@ public class MainActivity extends AppCompatActivity {
                 guideBinding.tutorialScreen1,
                 guideBinding.tutorialScreen2,
                 guideBinding.tutorialScreen3,
+                guideBinding.tutorialScreen4,
+                guideBinding.tutorialScreen5,
+                guideBinding.tutorialScreen6,
         };
-
-        // Configurar el OnClickListener para cada pantalla del tutorial
-        for (int i = 0; i < tutorialScreens.length; i++) {
-            final int index = i;
-            tutorialScreens[i].setClickable(true);
-            tutorialScreens[i].setOnClickListener(v -> updateTutorialStep());
-        }
 
         // Verifica si debe iniciarse la guía
         if (needToStartGuide) {
@@ -157,12 +157,90 @@ public class MainActivity extends AppCompatActivity {
      */
     private void updateTutorialStep() {
         guideBinding.btnEndTutorial.setVisibility(View.VISIBLE);
+        guideBinding.pulseImage.setVisibility(View.VISIBLE);
+        guideBinding.btnContinue.setVisibility(View.VISIBLE);
+
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(
+                guideBinding.pulseImage, "scaleX", 1f, 0.5f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(
+                guideBinding.pulseImage, "scaleY", 1f, 0.5f);
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
+                guideBinding.btnContinue, "alpha", 0f, 1f);
+
+        scaleX.setRepeatCount(3);
+        scaleY.setRepeatCount(3);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(scaleX).with(scaleY).before(fadeIn);
+        animatorSet.setDuration(1000);
+        animatorSet.start();
+
+        // Mueve el botón dependiendo del paso del tutorial
+        moveButtonToStep(tutorialStep);
+
         if (tutorialStep < tutorialScreens.length) {
             tutorialScreens[tutorialStep].setVisibility(View.GONE);
             tutorialStep++;
+
+            // Si ha llegado a "Mundos" cambiamos tab
+            if (tutorialStep == 2) {
+                navController.navigate(R.id.navigation_worlds);
+            }
+
+            // Si ha llegado a "Coleccionables" cambiamos tab
+            if (tutorialStep == 3) {
+                navController.navigate(R.id.navigation_collectibles);
+            }
+
+            // Si ha pasado al final volvemos al tab inicial
+            if (tutorialStep == 5) {
+                navController.navigate(R.id.navigation_characters);
+                //Desactivamos el botón saltar guía, el pulseImage y el Continuar
+                guideBinding.btnEndTutorial.setVisibility(View.GONE);
+                guideBinding.pulseImage.setVisibility(View.GONE);
+                guideBinding.btnContinue.setVisibility(View.GONE);
+            }
+            // Activamos el fragmento del layout correspondiente
             if (tutorialStep < tutorialScreens.length) {
                 tutorialScreens[tutorialStep].setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    private void moveButtonToStep(int step) {
+        int newMarginStart = 0;
+        int newMarginTop = 0;
+
+        switch (step) {
+            case 0:
+                newMarginStart = 25;
+                newMarginTop = 900;
+                break;
+            case 1:
+                newMarginStart = 425;
+                newMarginTop = 900;
+                break;
+            case 2:
+                newMarginStart = 825;
+                newMarginTop = 900;
+                break;
+            case 3:
+                newMarginStart = 940;
+                newMarginTop = -80;
+                break;
+        }
+
+        // Obtener el layout params del botón y actualizar la posición
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideBinding.pulseImage.getLayoutParams();
+        params.setMargins(newMarginStart, newMarginTop, 0, 0);
+        guideBinding.pulseImage.setLayoutParams(params);
+
+        // Animar el movimiento con ObjectAnimator
+        ObjectAnimator moveX = ObjectAnimator.ofFloat(guideBinding.pulseImage, "translationX", guideBinding.pulseImage.getTranslationX(), newMarginStart);
+        ObjectAnimator moveY = ObjectAnimator.ofFloat(guideBinding.pulseImage, "translationY", guideBinding.pulseImage.getTranslationY(), newMarginTop);
+
+        AnimatorSet moveSet = new AnimatorSet();
+        moveSet.playTogether(moveX, moveY);
+        moveSet.setDuration(500); // Ajusta la duración de la animación
+        moveSet.start();
     }
 }

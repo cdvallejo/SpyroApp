@@ -41,6 +41,7 @@
     <!-- Contenedor para la Guía Interactiva -->
     <FrameLayout
         android:id="@+id/tutorialContainer"
+        android:elevation="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"

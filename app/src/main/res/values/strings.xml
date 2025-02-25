@@ -7,7 +7,13 @@
     <string name="text_about">Aplicación desarrollada por \n <b>Carlos D. Vallejo Aranda.</b></string>
     <string name="accept">Aceptar</string>
     <string name="comenzar">Comenzar</string>
-    <string name="bienvenida">Bienvenido a la guía interactiva de esta app homenaje al videojuego Spyro the dragon!\n \n En ella aprenderás a navegar por su contenido. ¿Estás preparado? ¡Pulsa en Comenzar!</string>
-    <string name="personajes">Aquí podrás conocer a todos los personajes del mundo de Spyro.</string>
+    <string name="bienvenida">¡Bienvenido al tutorial de esta app homenaje al videojuego Spyro the dragon!\n \n En ella aprenderás a navegar por su contenido. ¿Estás preparado? ¡Pulsa en Comenzar!</string>
+    <string name="personajes">Aquí podrás conocer a todos los personajes de Spyro.</string>
     <string name="mundos">Aquí podrás explorar los mundos que componen el universo de Spyro</string>
+    <string name="saltar">Saltar guía</string>
+    <string name="continuar">Continuar</string>
+    <string name="coleccionables">Aquí encontrarás los ítems coleccionables que se encuentran a lo largo del juego</string>
+    <string name="about">En este icono obtendrás información sobre la app</string>
+    <string name="fin_tutorial">¡Has completado el tutorial! Es hora de adentrarse en el mundo de Spyro The Dragon</string>
+    <string name="boton_fin_tutorial">¡Empecemos!</string>
 </resources>
