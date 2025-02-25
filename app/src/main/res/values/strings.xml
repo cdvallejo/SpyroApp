@@ -8,4 +8,6 @@
     <string name="accept">Aceptar</string>
     <string name="comenzar">Comenzar</string>
     <string name="bienvenida">Bienvenido a la guía interactiva de esta app homenaje al videojuego Spyro the dragon!\n \n En ella aprenderás a navegar por su contenido. ¿Estás preparado? ¡Pulsa en Comenzar!</string>
+    <string name="personajes">Aquí podrás conocer a todos los personajes del mundo de Spyro.</string>
+    <string name="mundos">Aquí podrás explorar los mundos que componen el universo de Spyro</string>
 </resources>

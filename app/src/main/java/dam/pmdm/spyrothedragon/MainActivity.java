@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private GuideBinding guideBinding;
     private NavController navController = null;
     private int tutorialStep = 0;
-    private View[] tutorialScreens = new View[2];
+    private View[] tutorialScreens = new View[3]; // Asegúrate de que el tamaño coincida con el número de pantallas
     private Boolean needToStartGuide = true; // Controla si la guía debe mostrarse
 
     @Override
@@ -57,7 +57,15 @@ public class MainActivity extends AppCompatActivity {
         tutorialScreens = new View[]{
                 guideBinding.tutorialScreen1,
                 guideBinding.tutorialScreen2,
+                guideBinding.tutorialScreen3,
         };
+
+        // Configurar el OnClickListener para cada pantalla del tutorial
+        for (int i = 0; i < tutorialScreens.length; i++) {
+            final int index = i;
+            tutorialScreens[i].setClickable(true);
+            tutorialScreens[i].setOnClickListener(v -> updateTutorialStep());
+        }
 
         // Verifica si debe iniciarse la guía
         if (needToStartGuide) {
@@ -101,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Deshabilita la navegación si el tutorial aún no ha sido completado.
+     * Lo hago mediante un for porque directamente desactivando en conjunto no funciona
      */
     private void disableNavigation() {
 
@@ -118,13 +127,8 @@ public class MainActivity extends AppCompatActivity {
      * Habilita la navegación una vez que el tutorial ha sido completado.
      */
     private void enableNavigation() {
-        binding.navView.setEnabled(true);
-        binding.navView.setClickable(true);
 
-        binding.toolbar.setEnabled(true);
-        binding.toolbar.setClickable(true);
-
-        // Deshabilitar elementos del BottomNavigation
+        // Habilitar elementos del BottomNavigation
         for (int i = 0; i < binding.navView.getMenu().size(); i++) {
             binding.navView.getMenu().getItem(i).setEnabled(true);
         }
@@ -148,11 +152,17 @@ public class MainActivity extends AppCompatActivity {
         needToStartGuide = false; // Se marca como completado
     }
 
+    /**
+     * Actualiza el paso del tutorial y muestra la siguiente pantalla.
+     */
     private void updateTutorialStep() {
+        guideBinding.btnEndTutorial.setVisibility(View.VISIBLE);
         if (tutorialStep < tutorialScreens.length) {
             tutorialScreens[tutorialStep].setVisibility(View.GONE);
             tutorialStep++;
-            tutorialScreens[tutorialStep].setVisibility(View.VISIBLE);
+            if (tutorialStep < tutorialScreens.length) {
+                tutorialScreens[tutorialStep].setVisibility(View.VISIBLE);
+            }
         }
     }
 }
