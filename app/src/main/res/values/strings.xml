@@ -4,6 +4,8 @@
     <string name="characters">Personajes</string>
     <string name="collectibles">Coleccionables</string>
     <string name="title_about">Acerca de</string>
-    <string name="text_about">Aplicación desarrollada por \n <b>Lindsay Barrero Martínez.</b></string>
+    <string name="text_about">Aplicación desarrollada por \n <b>Carlos D. Vallejo Aranda.</b></string>
     <string name="accept">Aceptar</string>
+    <string name="comenzar">Comenzar</string>
+    <string name="bienvenida">Bienvenido a la guía interactiva de esta app homenaje al videojuego Spyro the dragon!\n \n En ella aprenderás a navegar por su contenido. ¿Estás preparado? ¡Pulsa en Comenzar!</string>
 </resources>
