@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Pantalla 1: Bienvenida -->
+    <FrameLayout
+        android:id="@+id/tutorialScreen1"
+        android:background="@drawable/tutorial_background"
+        android:layout_width="410dp"
+        android:layout_height="490dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginBottom="88dp"
+        android:visibility="gone"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/btnEndTutorial"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="209dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="152dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="@string/bienvenida"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnStartTutorial"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnStartTutorial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comenzar Guía"
+            android:layout_gravity="bottom|center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </FrameLayout>
+
+    <!-- Pantalla 2: Explicación de personajes -->
+    <FrameLayout
+        android:id="@+id/tutorialScreen2"
+        android:layout_width="327dp"
+        android:layout_height="151dp"
+        android:layout_marginTop="456dp"
+        android:background="@drawable/tutorial_background"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textStep"
+            android:layout_width="245dp"
+            android:layout_height="95dp"
+            android:layout_gravity="center"
+            android:text="@string/personajes"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="294dp" />
+    </FrameLayout>
+
+    <!-- Pantalla 3: Explicación de mundos -->
+    <FrameLayout
+        android:id="@+id/tutorialScreen3"
+        android:layout_width="319dp"
+        android:layout_height="214dp"
+        android:layout_marginTop="456dp"
+        android:background="@drawable/tutorial_background"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="251dp"
+            android:layout_height="128dp"
+            android:layout_gravity="center"
+            android:text="@string/mundos"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="294dp" />
+    </FrameLayout>
+
+    <!-- Pantalla 4: Explicación de coleccionables -->
+    <FrameLayout
+        android:id="@+id/tutorialScreen4"
+        android:layout_width="319dp"
+        android:layout_height="214dp"
+        android:layout_marginTop="456dp"
+        android:background="@drawable/tutorial_background"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="269dp"
+            android:layout_height="121dp"
+            android:layout_gravity="center"
+            android:text="@string/coleccionables"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="294dp" />
+    </FrameLayout>
+
+    <!-- Pantalla 5: Explicación del icono de información -->
+    <FrameLayout
+        android:id="@+id/tutorialScreen5"
+        android:layout_width="314dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="164dp"
+        android:background="@drawable/tutorial_background"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="269dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:text="@string/about"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="294dp" />
+    </FrameLayout>
+
+    <!-- Pantalla 6: Resumen final -->
+
+    <FrameLayout
+        android:id="@+id/tutorialScreen6"
+        android:layout_width="316dp"
+        android:layout_height="352dp"
+        android:layout_marginTop="188dp"
+        android:background="@drawable/tutorial_background"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="269dp"
+            android:layout_height="141dp"
+            android:layout_gravity="center"
+            android:text="@string/fin_tutorial"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="294dp" />
+
+        <Button
+            android:id="@+id/btnFinTutorial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="10dp"
+            android:text="@string/boton_fin_tutorial"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btnEndTutorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="736dp"
+        android:text="@string/saltar"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/pulseImage"
+        android:layout_width="243dp"
+        android:layout_height="221dp"
+        android:layout_marginStart="-80dp"
+        android:layout_marginTop="700dp"
+        android:src="@drawable/pulse"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnContinue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="108dp"
+        android:text="@string/continuar"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
