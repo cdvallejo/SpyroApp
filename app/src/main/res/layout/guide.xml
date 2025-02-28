@@ -102,8 +102,6 @@
 
     <!-- Pantalla 4: Explicación de coleccionables -->
 
-    <!-- Pantalla 5: Explicación del icono de información -->
-
     <FrameLayout
         android:id="@+id/tutorialScreen4"
         android:layout_width="319dp"
@@ -128,6 +126,7 @@
             tools:layout_editor_absoluteY="294dp" />
     </FrameLayout>
 
+    <!-- Pantalla 5: Explicación del icono de información -->
     <FrameLayout
         android:id="@+id/tutorialScreen5"
         android:layout_width="314dp"
@@ -207,7 +206,7 @@
         android:layout_height="221dp"
         android:layout_marginStart="-80dp"
         android:layout_marginTop="700dp"
-        android:src="@drawable/pulse"
+        android:src="@drawable/bubble"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

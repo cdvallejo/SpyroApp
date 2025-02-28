@@ -2,6 +2,7 @@ package dam.pmdm.spyrothedragon.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +42,8 @@ public class CollectiblesAdapter extends RecyclerView.Adapter<CollectiblesAdapte
         int imageResId = holder.itemView.getContext().getResources().getIdentifier(collectible.getImage(), "drawable", holder.itemView.getContext().getPackageName());
         holder.imageImageView.setImageResource(imageResId);
 
-        // Detectar clics en la imagen si es "Gems"
-        if (collectible.getName().equalsIgnoreCase("Gemas")) {
+        // Detectar clics en la imagen si es "Gemas"
+        if (collectible.getName().equals("Gemas")) {
             holder.imageImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

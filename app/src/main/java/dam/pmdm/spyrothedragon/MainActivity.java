@@ -1,6 +1,9 @@
 package dam.pmdm.spyrothedragon;
+import static java.security.AccessController.getContext;
+
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,11 +50,36 @@ public class MainActivity extends AppCompatActivity {
         guideBinding = GuideBinding.inflate(getLayoutInflater());
         binding.tutorialContainer.addView(guideBinding.getRoot());
 
-        // Configurar botones del tutorial
-        guideBinding.btnStartTutorial.setOnClickListener(v -> updateTutorialStep());
+        // Configurar botones del tutorial y sus sonidos
+        guideBinding.btnStartTutorial.setOnClickListener(v -> {
+            // Reproducir el sonido antes de iniciar el tutorial
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.empezar_sfx);
+            mediaPlayer.start();
+
+            // Liberar el MediaPlayer cuando termine de reproducirse
+            mediaPlayer.setOnCompletionListener(mp -> mp.release());
+
+            // Iniciar el tutorial
+            updateTutorialStep();
+        });
         guideBinding.btnEndTutorial.setOnClickListener(v -> endTutorial());
         guideBinding.btnContinue.setOnClickListener(v -> updateTutorialStep());
-        guideBinding.btnFinTutorial.setOnClickListener(v -> endTutorial());
+        guideBinding.btnFinTutorial.setOnClickListener(v -> {
+            // Usar MediaPlayer
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.finalizar_sfx);
+            mediaPlayer.start();
+
+            // Establecer el listener para cuando la reproducción termine
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    // Liberar el MediaPlayer cuando la reproducción termine
+                    mp.release();
+                }
+            });
+            enableNavigation();
+            endTutorial();
+        });
 
         // Configurar navegación
         Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.navHostFragment);
@@ -153,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private void endTutorial() {
         binding.tutorialContainer.setVisibility(View.GONE);
-        enableNavigation();
         needToStartGuide = false; // Se marca como completado
     }
 
@@ -212,7 +239,21 @@ public class MainActivity extends AppCompatActivity {
             // Aplicar la animación de fade_in del XML
             Animation fadeInBubble = AnimationUtils.loadAnimation(this, R.anim.fade_in);
             tutorialScreens[tutorialStep].startAnimation(fadeInBubble);
+
+            // Usar MediaPlayer para el sonido de cambio de animación del bubble
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.continuar_sfx);
+            mediaPlayer.start();
+
+            // Establecer el listener para cuando la reproducción termine
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    // Liberar el MediaPlayer cuando la reproducción termine
+                    mp.release();
+                }
+            });
         }
+
     }
 
     private void moveButtonToStep(int step) {
