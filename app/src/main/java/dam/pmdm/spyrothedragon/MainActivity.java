@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Configurar Toolbar
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Forzamos a que no haya botón atrás
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
 
         // Inflar el layout principal y el guide.xml
         guideBinding = GuideBinding.inflate(getLayoutInflater());
@@ -157,13 +162,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private void updateTutorialStep() {
         guideBinding.btnEndTutorial.setVisibility(View.VISIBLE);
-        guideBinding.pulseImage.setVisibility(View.VISIBLE);
+        guideBinding.showBubble.setVisibility(View.VISIBLE);
         guideBinding.btnContinue.setVisibility(View.VISIBLE);
 
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
-                guideBinding.pulseImage, "scaleX", 1f, 0.5f);
+                guideBinding.showBubble, "scaleX", 1f, 0.5f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(
-                guideBinding.pulseImage, "scaleY", 1f, 0.5f);
+                guideBinding.showBubble, "scaleY", 1f, 0.5f);
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(
                 guideBinding.btnContinue, "alpha", 0f, 1f);
 
@@ -194,15 +199,19 @@ public class MainActivity extends AppCompatActivity {
             // Si ha pasado al final volvemos al tab inicial
             if (tutorialStep == 5) {
                 navController.navigate(R.id.navigation_characters);
-                //Desactivamos el botón saltar guía, el pulseImage y el Continuar
+                //Desactivamos el botón saltar guía, el showBubble y el Continuar
                 guideBinding.btnEndTutorial.setVisibility(View.GONE);
-                guideBinding.pulseImage.setVisibility(View.GONE);
+                guideBinding.showBubble.setVisibility(View.GONE);
                 guideBinding.btnContinue.setVisibility(View.GONE);
             }
             // Activamos el fragmento del layout correspondiente
             if (tutorialStep < tutorialScreens.length) {
                 tutorialScreens[tutorialStep].setVisibility(View.VISIBLE);
             }
+
+            // Aplicar la animación de fade_in del XML
+            Animation fadeInBubble = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+            tutorialScreens[tutorialStep].startAnimation(fadeInBubble);
         }
     }
 
@@ -230,13 +239,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Obtener el layout params del botón y actualizar la posición
-        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideBinding.pulseImage.getLayoutParams();
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) guideBinding.showBubble.getLayoutParams();
         params.setMargins(newMarginStart, newMarginTop, 0, 0);
-        guideBinding.pulseImage.setLayoutParams(params);
+        guideBinding.showBubble.setLayoutParams(params);
 
         // Animar el movimiento con ObjectAnimator
-        ObjectAnimator moveX = ObjectAnimator.ofFloat(guideBinding.pulseImage, "translationX", guideBinding.pulseImage.getTranslationX(), newMarginStart);
-        ObjectAnimator moveY = ObjectAnimator.ofFloat(guideBinding.pulseImage, "translationY", guideBinding.pulseImage.getTranslationY(), newMarginTop);
+        ObjectAnimator moveX = ObjectAnimator.ofFloat(guideBinding.showBubble, "translationX", guideBinding.showBubble.getTranslationX(), newMarginStart);
+        ObjectAnimator moveY = ObjectAnimator.ofFloat(guideBinding.showBubble, "translationY", guideBinding.showBubble.getTranslationY(), newMarginTop);
 
         AnimatorSet moveSet = new AnimatorSet();
         moveSet.playTogether(moveX, moveY);

@@ -42,7 +42,7 @@ public class CollectiblesAdapter extends RecyclerView.Adapter<CollectiblesAdapte
         holder.imageImageView.setImageResource(imageResId);
 
         // Detectar clics en la imagen si es "Gems"
-        if (collectible.getName().equalsIgnoreCase("Gems")) {
+        if (collectible.getName().equalsIgnoreCase("Gemas")) {
             holder.imageImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
