@@ -215,12 +215,11 @@ public class MainActivity extends AppCompatActivity {
         if (tutorialStep < tutorialScreens.length) {
             // Cargar la transición desde el XML
             Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.slide_transition);
-
             // Aplicar la transición al contenedor del tutorial
             TransitionManager.beginDelayedTransition(binding.tutorialContainer, transition);
-
             // Ocultamos el tutorial del paso anterior
             tutorialScreens[tutorialStep].setVisibility(View.GONE);
+
             tutorialStep++;
 
             // Si ha llegado a "Mundos" cambiamos tab
