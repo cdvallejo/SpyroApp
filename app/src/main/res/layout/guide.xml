@@ -42,7 +42,7 @@
             android:id="@+id/btnStartTutorial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Comenzar Guía"
+            android:text="@string/comenzar_tutorial"
             android:layout_gravity="bottom|center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

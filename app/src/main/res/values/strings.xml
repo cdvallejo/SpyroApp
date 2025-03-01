@@ -16,4 +16,5 @@
     <string name="about">En este icono obtendrás información sobre la app</string>
     <string name="fin_tutorial">¡Has completado el tutorial! Es hora de adentrarse en el mundo de Spyro The Dragon</string>
     <string name="boton_fin_tutorial">¡Empecemos!</string>
+    <string name="comenzar_tutorial">Comenzar Guía</string>
 </resources>

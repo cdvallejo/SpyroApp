@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.transition.TransitionManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -210,6 +213,13 @@ public class MainActivity extends AppCompatActivity {
         moveButtonToStep(tutorialStep);
 
         if (tutorialStep < tutorialScreens.length) {
+            // Cargar la transición desde el XML
+            Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.slide_transition);
+
+            // Aplicar la transición al contenedor del tutorial
+            TransitionManager.beginDelayedTransition(binding.tutorialContainer, transition);
+
+            // Ocultamos el tutorial del paso anterior
             tutorialScreens[tutorialStep].setVisibility(View.GONE);
             tutorialStep++;
 
