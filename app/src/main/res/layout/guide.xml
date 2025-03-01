@@ -13,7 +13,7 @@
         android:layout_height="490dp"
         android:layout_marginTop="96dp"
         android:layout_marginBottom="88dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/btnEndTutorial"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,9 +41,10 @@
         <Button
             android:id="@+id/btnStartTutorial"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/comenzar_tutorial"
+            android:background="@drawable/button_personalized"
+            android:layout_height="72dp"
             android:layout_gravity="bottom|center"
+            android:text="@string/comenzar_tutorial"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -183,6 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="10dp"
+            android:background="@drawable/button_personalized"
             android:text="@string/boton_fin_tutorial"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
