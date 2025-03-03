@@ -1,7 +1,8 @@
-# SpyroApp - Prueba de tutorial, animaciones y contenido multimedia sobre una app preexistente homenaje a "Spyro The Dragon".
+![spyro1](https://github.com/user-attachments/assets/d1fcb7a4-0528-4af9-991e-d1bd3bdc47e2)# SpyroApp - Prueba de tutorial, animaciones y contenido multimedia sobre una app preexistente homenaje a "Spyro The Dragon".
 
-SpyroApp forma parte de una tarea en la que, a partir de una app dada, se le ha realizado un tutorial de inicio entre otros añadidos.
-Ddesarrollado como tarea para el módulo de Programación Multimedia y Dispositivos Móviles (FP DAM - IES Agudaulce).
+Este proyecto de Android es una tarea en la que, a partir de una app dada sobre el videojuego "Spyro The Dragon", había que realizar un tutorial interactivo como bienvenida a la app. Incluye un "Easter Egg": un vídeo oculto al pulsar
+cuatro veces sobre la imagen de la Gema en la pestaba de "Coleccionables".
+Desarrollado para el módulo de Programación Multimedia y Dispositivos Móviles (FP DAM - IES Agudaulce).
 
 ## Características principales:
 
@@ -21,6 +22,7 @@ Ddesarrollado como tarea para el módulo de Programación Multimedia y Dispositi
      * ObjectAnimator
      * VideoPlayer
      * MediaPlayer
+     * Transitions
   
 ## Instrucciones de uso:
 Para descargar el repositorio del proyecto e instalarlo:
@@ -34,9 +36,14 @@ Para descargar el repositorio del proyecto e instalarlo:
 (App probada con Pixel 7a API 34 y Medium Phone API 35)
 
 ## Conclusiones del desarrollador:
+En esta tarea, bastante más liviana que las anteriores, he aprendido cómo programar efectos multimedia en una aplicación Android. Es un mundo muy amplio donde se pueden hacer virguerías y efectos complejos, reconozco que he recurrido a efectos más simples y sencillos. Es imprescindible que estos vayan ligados a una experiencia de usuario satisfactoria y clara. Por ejemplo, soy consciente de que la burbuja que señala cada apartado debería ser más transparente o
+dejar su interior vacío para que se vea claramente el nombre de cada pestaña. Lo más difícil ha sido, como siempre, el comienzo: idear cómo empezar y qué pasos seguir. El dilema ha sido si hacer cada paso dle tutorial en distintos layouts xml o en uno solo. Un xml por paso me parecía poco optimizado, y como un único layout no lograba imaginar su implementación. Una IA me sugirió almacenar cada paso como un array de views de FrameLayout que se van mostrando y desactivando. Me pregunto de qué modo, siguiendo este sistemna de único layout, podría haberlo optimizado mejor, ya que la función que lo va mostrando tiene muchos condicionantes que, seguramente, podrían haberse simplificado con un código mucho mejor.
 
 ### He aprendido durante el proceso:
-
-### Espinas clavadas:
+A confeccionar un tutorial sobre el layout de una aplicación, a hacer animaciones con elementos drawables, a insertar vídeo y sonidos, a bloquear la navegación, a customizar elementos de diseño y a realizar transiciones entre layouts.
 
 ## Capturas de pantalla:
+![spyro1](https://github.com/user-attachments/assets/17a26a2c-2400-4f6b-9fbf-98da0df00a7a) ![spyro2](https://github.com/user-attachments/assets/cf047cfb-0b50-4a1c-8514-774a3a1370dd) ![spyro3](https://github.com/user-attachments/assets/d88ca329-5cac-4f16-8856-b95b5727a580)
+
+
+
