@@ -43,7 +43,8 @@ A confeccionar un tutorial sobre el layout de una aplicación, a hacer animacion
 
 ## Capturas de pantalla:
 ![spyro1](https://github.com/user-attachments/assets/17a26a2c-2400-4f6b-9fbf-98da0df00a7a) ![spyro2](https://github.com/user-attachments/assets/cf047cfb-0b50-4a1c-8514-774a3a1370dd) 
-![spyro3](https://github.com/user-attachments/assets/d88ca329-5cac-4f16-8856-b95b5727a580)
+![spyro3](https://github.com/user-attachments/assets/1d269786-6f0a-4914-a395-fcdfab8e1d44)
+
 
 
 
