@@ -3,6 +3,7 @@ import static java.security.AccessController.getContext;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private GuideBinding guideBinding;
     private NavController navController = null;
     private int tutorialStep = 0;
-    private View[] tutorialScreens = new View[3]; // Asegúrate de que el tamaño coincida con el número de pantallas
+    private View[] tutorialScreens;
     private Boolean needToStartGuide = true; // Controla si la guía debe mostrarse
 
     @Override
@@ -45,13 +46,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Configurar Toolbar
         setSupportActionBar(binding.toolbar);
-        // Forzamos a que no haya botón atrás
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setHomeButtonEnabled(false);
 
         // Inflar el layout principal y el guide.xml
         guideBinding = GuideBinding.inflate(getLayoutInflater());
         binding.tutorialContainer.addView(guideBinding.getRoot());
+
+        // Cargar SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        needToStartGuide = sharedPreferences.getBoolean("tutorial_completed", true);
 
         // Configurar botones del tutorial y sus sonidos
         guideBinding.btnStartTutorial.setOnClickListener(v -> {
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             // Iniciar el tutorial
             updateTutorialStep();
         });
+        // Binding de botones
         guideBinding.btnEndTutorial.setOnClickListener(v -> endTutorial());
         guideBinding.btnContinue.setOnClickListener(v -> updateTutorialStep());
         guideBinding.btnFinTutorial.setOnClickListener(v -> {
@@ -90,10 +93,19 @@ public class MainActivity extends AppCompatActivity {
             navController = NavHostFragment.findNavController(navHostFragment);
             NavigationUI.setupWithNavController(binding.navView, navController);
             NavigationUI.setupActionBarWithNavController(this, navController);
+
         }
+        // Desactivamos la flecha de volver atrás
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.navigation_characters || destination.getId() == R.id.navigation_worlds || destination.getId() == R.id.navigation_collectibles) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            } else {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        });
 
         binding.navView.setOnItemSelectedListener(this::selectedBottomMenu);
-
+        // Inflamos todoas las páginas que tiene el array tutorialScreens
         tutorialScreens = new View[]{
                 guideBinding.tutorialScreen1,
                 guideBinding.tutorialScreen2,
@@ -109,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             startTutorial();
         }
     }
-
+    // Identifica las pestañas del Bottom Menu
     private boolean selectedBottomMenu(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.nav_characters)
             navController.navigate(R.id.navigation_characters);
@@ -184,7 +196,14 @@ public class MainActivity extends AppCompatActivity {
      */
     private void endTutorial() {
         binding.tutorialContainer.setVisibility(View.GONE);
-        needToStartGuide = false; // Se marca como completado
+        needToStartGuide = false;
+        enableNavigation();
+
+        // Guardar en SharedPreferences que el tutorial ha sido completado
+        SharedPreferences sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("tutorial_completed", false);
+        editor.apply();
     }
 
     /**
@@ -195,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
         guideBinding.showBubble.setVisibility(View.VISIBLE);
         guideBinding.btnContinue.setVisibility(View.VISIBLE);
 
+        // Establecemos la animación de la burbuja
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(
                 guideBinding.showBubble, "scaleX", 1f, 0.5f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(
@@ -209,8 +229,8 @@ public class MainActivity extends AppCompatActivity {
         animatorSet.setDuration(1000);
         animatorSet.start();
 
-        // Mueve el botón dependiendo del paso del tutorial
-        moveButtonToStep(tutorialStep);
+        // Mueve la burbuja dependiendo del paso del tutorial
+        moveBubbleToStep(tutorialStep);
 
         if (tutorialStep < tutorialScreens.length) {
             // Cargar la transición desde el XML
@@ -265,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void moveButtonToStep(int step) {
+    private void moveBubbleToStep(int step) {
         int newMarginStart = 0;
         int newMarginTop = 0;
 
@@ -302,4 +322,5 @@ public class MainActivity extends AppCompatActivity {
         moveSet.setDuration(500); // Ajusta la duración de la animación
         moveSet.start();
     }
+
 }
