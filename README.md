@@ -1,4 +1,4 @@
-SpyroApp - Guía interactiva
+# SpyroApp - Guía interactiva
 
 Este proyecto de Android es una tarea en la que, a partir de una app dada sobre el videojuego "Spyro The Dragon", había que realizar un tutorial interactivo como bienvenida a la app. Incluye un "Easter Egg": un vídeo oculto al pulsar
 cuatro veces sobre la imagen de la Gema en la pestaba de "Coleccionables".
