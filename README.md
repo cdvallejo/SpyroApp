@@ -1,4 +1,4 @@
-![spyro1](https://github.com/user-attachments/assets/d1fcb7a4-0528-4af9-991e-d1bd3bdc47e2)# SpyroApp - Prueba de tutorial, animaciones y contenido multimedia sobre una app preexistente homenaje a "Spyro The Dragon".
+SpyroApp - Guía interactiva
 
 Este proyecto de Android es una tarea en la que, a partir de una app dada sobre el videojuego "Spyro The Dragon", había que realizar un tutorial interactivo como bienvenida a la app. Incluye un "Easter Egg": un vídeo oculto al pulsar
 cuatro veces sobre la imagen de la Gema en la pestaba de "Coleccionables".
